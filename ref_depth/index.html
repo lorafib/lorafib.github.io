@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Refinement of Monocular Depth Maps via Multi-View Differentiable Rendering</title>
+
+    <meta name="description" content="In this paper, we present a novel way to refine depth maps initialized from monoscopic depth estimators via mulit-view differential rendering." />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:video" content="https://lorafib.github.io/ref_depth/media/result_teaser_lower_faster.mp4">
+    <meta property="og:video:type" content="video/mp4">
+    <!-- <meta property="og:video:width" content="750">
+    <meta property="og:image:height" content="500"> -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Refinement of Monocular Depth Maps via Multi-View Differentiable Rendering" />
+    <meta property="og:description" content="In this paper, we present a novel way to refine depth maps initialized from monoscopic depth estimators via mulit-view differential rendering." />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="https://lorafib.github.io/ref_depth/" />
+    <meta name="twitter:title" content="Refinement of Monocular Depth Maps via Multi-View Differentiable Rendering" />
+    <meta name="twitter:description" content="In this paper, we present a novel way to refine depth maps initialized from monoscopic depth estimators via mulit-view differential rendering." />
+    <meta name="twitter:image" content="https://lorafib.github.io/ref_depth/media/result_teaser_lower_faster.mp4" />
+
+
+<!--
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+//-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/video_comparison.js"></script>
+
+    <link rel="stylesheet" href="css/dics.min.css">
+    <script src="js/dics.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', domReady);
+        function domReady() {
+            for (const e of document.querySelectorAll(".b-dics")) {
+                new Dics({
+                    container: e,
+                    textPosition: "top"
+                });
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <a href="..">Back to my projects</a>
+        <br><br>
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>Refinement of Monocular Depth Maps <br>via Multi-View Differentiable Rendering</b>
+                
+                <!-- <small>
+                    Under review
+                </small> -->
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a style="text-decoration:none" href="https://lorafib.github.io">
+                            Laura Fink
+                        </a>
+
+                        <br>FAU Erlangen-Nürnberg
+                        <br>Fraunhofer IIS
+                    </li>
+                    <li>
+                        <a style="text-decoration:none" href="https://lfranke.github.io">
+                            Linus Franke
+                        </a>
+                        <br>FAU Erlangen-Nürnberg<br> &zwnj;
+                    </li>
+                    <li>
+                        <a style="text-decoration:none">
+                            Joachim Keinert
+                        </a>
+                        <br>Fraunhofer IIS<br> &zwnj;
+                    </li>
+                    <li>
+                        <a style="text-decoration:none" href="https://www.lgdv.tf.fau.de/person/marc-stamminger/">
+                            Marc Stamminger
+                        </a>
+                        <br>FAU Erlangen-Nürnberg
+                        <br>  &zwnj;
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="TODO">
+                            <img src="media/paper_icon.png" height="60px">
+                                <h4><strong>Paper (coming soon)</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="TODO">
+                            <img src="media/youtube_icon.png" height="60px">
+                                <h4><strong>Paper (coming soon)</strong></h4>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="">
+                            <image src="media/github.png" height="60px">
+                                <h4><strong>Code</strong></h4>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <video id="v0" width="100%" autoplay loop muted controls>
+                  <source src="media/teaser_animated_lower_faster_cropped.mp4" type="video/mp4" />
+                </video>
+						</div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    The accurate reconstruction of per-pixel depth for an image is vital for many tasks in computer graphics, computer vision, and robotics.
+                    In this paper, we present a novel approach to generate view consistent and detailed depth maps from a number of posed images.
+                    We leverage advances in monocular depth estimation, which generate topologically complete, but metrically inaccurate depth maps and refine them in a two-stage optimization process based on a differentiable renderer.
+                    Taking the monocular depth map as input, we first transform the map to a triangle surface mesh and scale this map to absolute distances based on structure-from-motion.
+                    We then refine this depth mesh in a local optimization, enforcing photometric and geometric consistency.
+                </p>
+                <p class="text-justify">
+                    Our evaluation shows that our method is able to generate dense, detailed, high-quality depth maps, also in challenging indoor scenarios, 
+                    and outperforms state-of-the-art depth reconstruction approaches.             
+                </p>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <video id="v0" width="100%" autoplay loop muted controls>
+                  <source src="media/result_teaser_lower_faster.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Pipeline
+                </h3>
+                Overview of our method: We employ monocular depth estimation for a relative, but topologically complete depth map. 
+                Results from Structure-from-Motion are used to scale the depth map to absolute space. 
+                Following, we convert the depth map to a surface mesh which is refined via differentiable rendering. 
+                The refinement is done in two consecutive steps: 
+                first, we learn a mapping function that smoothly aligns the depth map to the sparse point cloud and, 
+                second, we refine per-vertex positions resulting in accurate, absolute depth maps.
+            <br><br>
+                <img id="test" src="media/pipeline.png" width="100%">  
+            </div>
+        </div>
+        <br>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Coarse and Local Refinement
+                </h3>
+
+                After the initial scale approximated from the sparse point cloud, we refine the depth map in two conscutive steps.
+                First, we train a shallow MLP that coarsely align the initialization to the the sparse point cloud.
+                Second, the meshed depth map is optimized on a vertex-basis to achieve multi-view consistency.
+            <br><br>
+
+
+                <video id="v0" width="100%" autoplay loop muted controls> 
+                  <source src="media/coarse_refinement_lower.mp4" type="video/mp4" />
+                </video>
+                <div style="width: 100%; text-align: center;"> 
+                    Coarse refinement via shallow MLP
+                </div>
+                <br><br>
+                <video id="v0" width="100%" autoplay loop muted controls>
+                  <source src="media/local_refinement_lower.mp4" type="video/mp4" />
+                </video>
+                <div style="width: 100%; text-align: center;"> 
+                    Local refinement of the meshed depth map for photometric consistency.
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+
+        <div class="row comp-margin">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Regularizers
+                </h3>
+                
+                We employ effective edge aware and Poisson blending [Perez 2003] inspired regularizers 
+                to exploit the strong initial estimates of the mono estimator.
+                <br>
+                
+                <div style="width: 100%; text-align: center;">
+                    (Videos will play during mouse hovering / on touch on mobile version.)
+                    <video class="video" id="regularizer" loop playsinline autoplay muted src="media/regularizer_with_vs_without_faster_smalleer.mp4" ></video>
+                    <canvas class="videoMerge" id="regularizerMerge"></canvas>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">
+                                    With
+                                </td>
+                                <td style="text-align: right;">
+                                    Without
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>  
+                </div>
+            </div>
+        </div>
+        <br>
+
+
+        <div class="row comp-margin">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Results: Comparisons on [Scannet++ 2023] Scenes.
+                </h3>
+                
+                We present qualitative comparisons against MVSFormer [Cao 2022] and MVSFormer++ [Ren 2024] which ranked 1st and 2nd place of the Tanks and Temples Point Cloud Reconstruction Benchmark [TnT 2017]
+                 at the time of writing, and also against COLMAP [Schönberger 2016].
+                 <br>
+                
+                 <div style="width: 100%; text-align: center;">
+                    (Videos will play during mouse hovering / on touch on mobile version.)
+                    <video class="video" id="ours_colmap_09f" loop playsinline autoplay muted src="media/comparisons/09f_ours_vs_colmap.mp4" ></video>
+                    <canvas class="videoMerge" id="ours_colmap_09fMerge"></canvas>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">
+                                    Ours
+                                </td>
+                                <td style="text-align: right;">
+                                    COLMAP [Schönberger 2016]
+                                </td>
+                            </tr>
+                        </tbody></table>  
+                    </div>
+
+                    <div style="width: 100%; text-align: left;">
+                        <video class="video" id="ours_mvsformer_3e8" loop playsinline autoplay muted src="media/comparisons/3e8_ours_vs_mvsformer.mp4" ></video>
+                        <canvas class="videoMerge" id="ours_mvsformer_3e8Merge"></canvas>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: left;">
+                                        Ours
+                                    </td>
+                                    <td style="text-align: right;">
+                                        MVSFormer [Cao 2022]
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>  
+                    </div>
+                    <div style="width: 100%; text-align: left;">
+                        <video class="video" id="ours_mvsformerplusplus_825" loop playsinline autoplay muted src="media/comparisons/825_ours_vs_mvsformerplusplus.mp4" ></video>
+                        <canvas class="videoMerge" id="ours_mvsformerplusplus_825Merge"></canvas>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: left;">
+                                        Ours
+                                    </td>
+                                    <td style="text-align: right;">
+                                        MVSFormer++ [Ren 2024]
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>  
+                    </div>
+                     
+                <p class="text-justify"></p>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- TODO -->
+        <!-- <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Video with short Explanation
+                </h3>
+                <div class="text-center">
+                    <div style="position:relative;padding-top:56.25%;"> 
+                        <iframe src="https://www.youtube-nocookie.com/embed/aMbE5WAgD2k?start=0&amp;loop=1&amp;autoplay=0&amp;mute=0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+        <!-- &amp;end=30 -->
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-12 col-md-offset-0">
+                    <textarea id="bibtex" class="form-control" readonly>
+@article{fink2024refdepth,
+    title={Refinement of Monocular Depth Maps via Multi-View Differentiable Rendering},
+    author={Laura Fink and Linus Franke and Joachim Keinert and Marc Stamminger},
+    journal={arXiv preprint arXiv:TODO},
+    year = {2024}
+}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+
+                <p class="text-justify">
+                We would like to thank all members of the Visual Computing Lab Erlangen for the fruitful discussions.
+                Specifically, we appreciate Darius Rückert's support during late night debugging sessions.
+                <br>
+                The authors gratefully acknowledge the scientific support and HPC resources provided by the National High Performance Computing Center  of the Friedrich-Alexander-Universität Erlangen-Nürnberg (NHR@FAU) under the project b212dc. NHR funding is provided by federal and Bavarian state authorities. NHR@FAU hardware is partially funded by the German Research Foundation (DFG) – 440719683.
+                Linus Franke was supported by the Bavarian Research Foundation (Bay. Forschungsstiftung) AZ-1422-20.
+                Joachim Keinert was supported by the Free State of Bavaria in the DSAI project.
+                </p>
+                <br>
+                <br>
+                
+
+                <p class="text-justify">
+                    The website template was adapted from  <a href="https://lfranke.github.io/vet">VET</a>, who borrowed from <a href="https://jonbarron.info/zipnerf/">Zip-NeRF</a>, who borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>.
+                    Image sliders are from <a href="https://bakedsdf.github.io/">BakedSDF</a>.
+                </p>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                References
+            </h3>
+    <div class="content has-text-justified">
+        <p>    
+            [Schönberger  2016] Johannes Lutz Schönberger, Enliang Zheng, Marc Pollefeys, and Jan-Michael Frahm. 
+            Pixelwise view selection for un-structured multi-view stereo. In European Conference on
+            Computer Vision (ECCV), 2016.
+        </p>
+        <p>    
+            [Cao  2022] Chenjie Cao, Xinlin Ren, and Yanwei Fu. 
+            MVSFormer: Multi-view stereo by learning robust image features and temperature-based depth. 
+            Trans. Mach. Learn. Res., 2022.
+        </p>
+        <p>
+            [Ren 2024] Xinlin Ren, Chenjie Cao and Yanwei Fu. MVSFormer++:
+            Revealing the devil in transformer’s details for multi-view
+            stereo. In International Conference on Learning Represen-
+            tations (ICLR), 2024
+        </p>
+        <p>
+            [Yeshwanth 2023] Chandan Yeshwanth, Yueh-Cheng Liu, Matthias Nießner,
+            and Angela Dai. Scannet++: A high-fidelity dataset of 3d in-
+            door scenes. In Proceedings of the IEEE/CVF International
+            Conference on Computer Vision, pages 12–22, 2023.
+        </p>
+        <p>
+            [Knapitsch 2017] Arno Knapitsch, Jaesik Park, Qian-Yi Zhou, and Vladlen Koltun. 
+            Tanks and Temples: Benchmarking Large-Scale Scene Reconstruction. 
+            ACM Transactions on Graphics, 36 (4), 2017.
+        </p>
+        <p>
+            [Perez 2003] Patrick Perez, Michel Gangnet, and Andrew Blake. Poisson
+            image editing. In ACM SIGGRAPH 2003 Papers, pages 313–318, 2003.
+        </p>
+      </div>
+    </div>
+
+</body>
+</html>

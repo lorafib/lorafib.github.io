@@ -26,6 +26,7 @@
                 <p style="text-align:center">
                   <a href="mailto:">laura (dot) fink (at) fau (dot) de</a> &nbsp;/&nbsp;
                   <a href="https://scholar.google.de/citations?user=rEH6cSQAAAAJ&hl=en">Scholar</a> &nbsp;/&nbsp;
+                  <br>
                   <a href="https://github.com/lorafib/">Personal Github</a> &nbsp;/&nbsp;
                   <a href="https://github.com/lfink-iis">Fraunhofer Github</a>
                 </p>
@@ -47,6 +48,90 @@
             </tr>
           </tbody></table>
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+
+        <tr onmouseout="ref_depth_stop()" onmouseover="ref_depth_start()" bgcolor="#ffffd0">
+          <td style="padding:20px;width:25%;vertical-align:middle">
+            <div class="one">
+              <div class="two" id='ref_depth_image'><video   height=100%  width=100%  muted autoplay loop>
+              <source src="images/ref_depth_teaser.mp4" type="video/mp4" >
+              Your browser does not support the video tag.
+              </video></div>
+              <img style="vertical-align: bottom;" translate=12px src='images/ref_depth_teaser.jpg' width="160" height="70">
+            </div>
+            <script type="text/javascript">
+              function ref_depth_start() {
+                document.getElementById('ref_depth_image').style.opacity = "1";
+              }
+              function ref_depth_stop() {
+                document.getElementById('ref_depth_image').style.opacity = "0";
+              }
+              ref_depth_stop()
+            </script>
+          </td>
+          <td style="padding:20px;width:75%;vertical-align:middle">
+            <a href="https://lorafib.github.io/ref_depth">
+              <span class="papertitle">Refinement of Monocular Depth Maps via Multi-View Differentiable Rendering</span>
+            </a>
+            <br>
+            <strong>Laura Fink</strong>, Linus Franke, Joachim Keinert, Marc Stamminger
+            <br>
+            <em>Preprint</em>, 2024
+            <br>
+            <a href="https://lorafib.github.io/ref_depth">project page</a>
+            / more coming soon
+            <!-- <a href="http://arxiv.org/abs/TODO">paper</a>
+            /
+            <a href="https://youtu.be/TODO">video</a> -->
+            <p></p>
+            <p>Dense and mulit-view consitent depth maps from an monoscopically estimated initialization.</p>
+          </td>
+        </tr>
+
+
+        <tr onmouseout="trips_stop()" onmouseover="trips_start()" >
+          <td style="padding:20px;width:25%;vertical-align:bottom">
+            <div class="one">
+              <div class="two" id='trips_image'><video  width=100% height=100%  muted autoplay loop>
+              <source src="images/trips_teaser_website.mp4" type="video/mp4" >
+              Your browser does not support the video tag.
+              </video></div>
+              <img style="vertical-align: bottom;" translate=12px src='images/trips_teaser.jpeg' width="160" height="100">
+            </div>
+            <script type="text/javascript">
+              function trips_start() {
+                document.getElementById('trips_image').style.opacity = "1";
+              }
+              function trips_stop() {
+                document.getElementById('trips_image').style.opacity = "0";
+              }
+              trips_stop()
+            </script>
+          </td>
+          <td style="padding:20px;width:75%;vertical-align:top">
+            <a href="trips">
+              <span class="papertitle">TRIPS: Trilinear Point Splatting for Real-Time Radiance Field Rendering</span>
+            </a>
+            <br>
+            Linus Franke,
+            Darius Rückert,
+            <strong>Laura Fink</strong>,
+            Marc Stamminger
+            <br>
+            <em>Eurographics (Computer Graphics Forum)</em>, 2024
+            <br>
+            <a href="https://lfranke.github.io/trips">project page</a>
+            /
+            <a href="https://arxiv.org/abs/2401.06003">paper</a>
+            /
+            <a href="https://youtu.be/Nw4A1tIcErQ">video</a>
+            /
+            <a href="https://github.com/lfranke/TRIPS">code</a>
+            <p></p>
+            <p>
+            Rendering and optimizing neural point clouds via trilinear point splatting and tiny neural networks for novel-view synthesis.
+            </p>
+          </td>
+        </tr>
 
 
         <tr onmouseout="livenvs_stop()" onmouseover="livenvs_start()" bgcolor="#ffffd0">
@@ -213,7 +298,7 @@
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
           <a href="https://link.springer.com/chapter/10.1007/978-3-031-47969-4_25">
-            <span class="papertitle">UniTorch-Integrating Neural Rendering into Unity</span>
+            <span class="papertitle">UniTorch – Integrating Neural Rendering into Unity</span>
           </a>
           <br>
           <strong>Laura Fink</strong>, Daniel Keitel, Marc Stamminger, Joachim Keinert 
@@ -259,7 +344,7 @@
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
           <a href="https://arxiv.org/pdf/1903.03837">
-            <span class="papertitle">Lumipath–towards real-time physically-based rendering on embedded devices</span>
+            <span class="papertitle">Lumipath – Towards real-time physically-based rendering on embedded devices</span>
           </a>
           <br>
           <strong>Laura Fink</strong>, Sing Chun Lee, Jie Ying Wu, Xingtong Liu, Tianyu Song, Yordanka Velikova, Marc Stamminger, Nassir Navab, and Mathias Unberath
