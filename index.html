@@ -75,7 +75,7 @@
             <br>
             <strong>Laura Fink</strong>, Linus Franke, Joachim Keinert, Marc Stamminger
             <br>
-            <em>Preprint</em>, 2024
+            <em>arXiv</em>, 2024
             <br>
             <a href="https://lorafib.github.io/ref_depth">project page</a>
             / 
@@ -88,6 +88,57 @@
             <p>Dense and multi-view consistent depth maps from an monoscopically estimated initialization.</p>
           </td>
         </tr>
+
+
+        <tr onmouseout="vrsplatting_stop()" onmouseover="vrsplatting_start()">
+          <td style="padding:20px;width:25%;vertical-align:middle">
+            <div class="one">
+              <div class="two" id='vrsplatting_video' style="transition: opacity 0.4s">
+                <video width=100% height=100% muted autoplay loop>
+                  <source src="images/vrsplatting_teaser_website.mp4" type="video/mp4">Your browser does not support the video tag.
+                </video>
+              </div>
+              <img src='images/vrsplatting_teaser.jpg' id='vrsplatting_image' width="160" style="transition: opacity 0.4s">
+            </div>
+            <script type="text/javascript">
+              function vrsplatting_start() {
+                document.getElementById('vrsplatting_image').style.opacity = "0";
+                document.getElementById('vrsplatting_video').style.opacity = "1";
+              }
+
+              function vrsplatting_stop() {
+                document.getElementById('vrsplatting_video').style.opacity = "0";
+                document.getElementById('vrsplatting_image').style.opacity = "1";
+              }
+              vrsplatting_stop()
+            </script>
+          </td>
+              <td style="padding:20px;width:75%;vertical-align:top">
+                <a href="vr_splatting">
+                  <span class="papertitle">VR-Splatting: Foveated Radiance Field Rendering via 3D Gaussian Splatting and Neural Points</span>
+                </a>
+                <br>
+                Linus Franke,
+                <strong>Laura Fink</strong>,
+                Marc Stamminger
+                <br>
+                <em>arXiv</em>, 2024
+                <br>
+                <a href="https://lfranke.github.io/vr_splatting">project page</a>
+                /
+                <a href="https://arxiv.org/abs/2410.17932">paper</a>
+           <!--     /
+                <a href="https://youtu.be/Nw4A1tIcErQ">video</a>       -->
+                /
+                <a href="https://github.com/lfranke/vr_splatting">code</a>
+       
+                <p></p>
+                <p>
+                Foveated radiance field rendering with smooth Gaussian peripheral and neural point splats for crisp foveal rendering.
+                </p>
+              </td>
+            </tr>
+
 
 
         <tr onmouseout="trips_stop()" onmouseover="trips_start()" >
