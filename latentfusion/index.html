@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>LatentFusion: Decoding Consolidated 3D Geometry from Feed-forward Geometry Transformer Latents</title>
+
+    <meta name="description" content="In this paper, we present a novel way to refine depth maps initialized from monoscopic depth estimators via mulit-view differential rendering." />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="https://lorafib.github.io/latentfusion/media/teaser.jpg">
+    <meta property="og:image:type" content="image/jpg">
+    <!-- <meta property="og:video:width" content="750">
+    <meta property="og:image:height" content="500"> -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="LatentFusion: Decoding Consolidated 3D Geometry from Feed-forward Geometry Transformer Latents" />
+    <meta property="og:description" content="In this paper, we present a novel way to refine depth maps initialized from monoscopic depth estimators via mulit-view differential rendering." />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="https://lorafib.github.io/latentfusion/" />
+    <meta name="twitter:title" content="LatentFusion: Decoding Consolidated 3D Geometry from Feed-forward Geometry Transformer Latents" />
+    <meta name="twitter:description" content="In this paper, we present a novel way to refine depth maps initialized from monoscopic depth estimators via mulit-view differential rendering." />
+    <meta name="twitter:image" content="https://lorafib.github.io/latentfusion/media/teaser.jpg" />
+
+
+
+    <link rel="icon" type="image/png" href="media/paper_icon.png">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/video_comparison.js"></script>
+
+    <link rel="stylesheet" href="css/dics.min.css">
+    <script src="js/dics.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', domReady);
+        function domReady() {
+            for (const e of document.querySelectorAll(".b-dics")) {
+                new Dics({
+                    container: e,
+                    textPosition: "top"
+                });
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <a href="..">Back to my projects</a>
+        <br><br>
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>LatentFusion:</b> Decoding Consolidated 3D Geometry from Feed-forward Geometry Transformer Latents
+                
+                <!-- <small>
+                    Under review
+                </small> -->
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a style="text-decoration:none" href="https://lorafib.github.io">
+                            Laura Fink
+                        </a>
+                        <br>FAU Erlangen-Nürnberg <br> &zwnj;
+                    </li>
+                    <li>
+                        <a style="text-decoration:none" href="https://lfranke.github.io">
+                            Linus Franke
+                        </a>
+                        <br>Inria<br> FAU Erlangen-Nürnberg
+                    </li>
+                    <li>
+                        <a style="text-decoration:none" href="https://grgkopanas.github.io/">
+                            George Kopanas
+                        </a>
+                        <br>Google Deepmind<br> &zwnj;
+                    </li>
+                    <li>
+                        <a style="text-decoration:none" href="https://www.lgdv.tf.fau.de/person/marc-stamminger/">
+                            Marc Stamminger
+                        </a>
+                        <br>FAU Erlangen-Nürnberg
+                        <br>  &zwnj;
+                    </li>
+                    <li>
+                        <a style="text-decoration:none" href="https://phogzone.com/">
+                            Peter Hedman
+                        </a>
+                        <br>Google Deepmind<br> &zwnj;
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href=https://doi.org/todo>
+                            <img src="media/paper_icon.png" height="60px">
+                                <h4><strong>Paper</strong></h4> (coming soon)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="todo">
+                            <img src="media/youtube_icon.png" height="60px">
+                                <h4><strong>Video</strong></h4> (coming soon)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/lorafib/latentfusion">
+                            <img src="media/github.png" height="60px">
+                                <h4><strong>Code</strong></h4> (coming soon)
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <video id="v0" width="100%" autoplay loop muted controls>
+                  <source src="media/latentfusion_teaser.mp4" type="video/mp4" />
+                </video>
+                <p class="text-center">
+                    Example with two input views.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    We propose a feed-forward method for dense Signed Distance Field (SDF) regression from unstructured image collections in less than three seconds, without camera calibration or post-hoc fusion. 
+                    Our key insight is that the intermediate feature space of pretrained multi-view feed-forward geometry transformers already encodes a powerful joint world representation; yet, existing pipelines discard it, routing features through per-view prediction heads before assembling 3D geometry post-hoc, which discards valuable completeness information and accumulates inaccuracies.
+                </p>
+                <p class="text-justify">
+                    We instead perform 3D extraction directly from features of feed-forward geometry transformer via learned volumetric extraction: voxelized canonical embeddings that progressively absorb multi-view geometry information through interleaved cross- and self-attention into a structured volumetric latent grid. 
+                    A simple convolutional decoder then maps this grid to a dense SDF. 
+                    We additionally propose a scalable, validity-aware supervision scheme directly using SDFs derived from depth maps or 3D assets, tackling practical issues like non-watertight meshes.
+                    Our approach yields complete and well-defined distance values across sparse- and dense-view settings and demonstrates geometrically plausible completions.              
+                </p>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Overview
+                </h3>
+                <p class="text-justify">
+                LatentFusion directly regresses a 3D representation from the latent space of a multi-view geometry transformer, bypassing per-view prediction and post-hoc fusion. 
+                This, compared to VGGT [Wang, 2025] using TSDF fusion, yields improved surface completeness under sparse views (left, 2 views) and avoids error accumulation reducing details at scale (right, 24 views), also reflected in the F-score curves across view counts (center).
+                </p>
+            <br>
+                <img id="test" src="media/teaser.png" width="100%">  
+            </div>
+        </div>
+        <br>
+
+        
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Dimensionality of Extraction
+                </h3>
+
+                <p class="text-justify">
+                Common pipelines like VGGT [Wang, 2025] (top) route transformer features through per-view 2D decoder heads, discarding the joint multi-view representation before 3D assembly using e.g. TSDF fusion [Millane, 2024] or Poisson surface reconstruction [Kazhdan, 2006].
+                We instead extract dense 3D features directly from the transformer's intermediate feature space, preserving the full multi-view information.
+                </p>
+            <br>
+                <img id="test" src="media/2dvs3d.png" width="100%">  
+            </div>
+        </div>
+        <br>
+
+        
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Architecture
+                </h3>
+
+                <p class="text-justify">
+                The geometry transformer processes tokenized input images, yielding a list of 2D intermediate features extracted from different stages. 
+                The extraction transformer (orange) leverages 2D-to-3D cross attention (green) to absorb the 3D information into features of the learned canonical embedding, and distributes this information via 3D self-attention (blue) throughout the volumetric latent.
+                The head decodes the resulting structured latent into a dense SDF grid.
+                </p>
+            <br>
+                <img id="test" src="media/architecture.png" width="100%">  
+            </div>
+        </div>
+        <br>
+
+       
+        <br>
+
+
+        <div class="row comp-margin">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Sparse View Setting
+                </h3>
+                
+                <p class="text-justify">
+                LatentFusion produces plausible reconstructions from only <b>two input views</b>, extrapolating the predicted SDF in unboserved regions. 
+                </p>
+                <table style="width: 100%; border-collapse: collapse;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">
+                                <div style="width: 60%; text-align: center;">
+                                    
+                                    <table style="width: 150%; border-collapse: collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    Ours
+                                                </td>
+                                                <td style="text-align: right;">
+                                                    VGGT+TSDF
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>  
+                                    <video class="video" id="tower2_ours_vs_vggttsdf" loop playsinline autoplay muted src="media/videos/tower2_latentfusionvsvggtfttsdf.mp4" ></video>
+                                    <canvas class="videoMerge" id="tower2_ours_vs_vggttsdfMerge"></canvas>
+                                </div>
+                            </td>
+                            <td style="text-align: right;">
+                                <div style="width: 60%; text-align: right;">
+                                
+                                    <table style="width: 150%; border-collapse: collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    Ours
+                                                </td>
+                                                <td style="text-align: right;">
+                                                    VGGT+Poisson
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>  
+                                    <video class="video" id="tower2_ours_vs_poisson" loop playsinline autoplay muted src="media/videos/tower2_latentfusionvsvggtftpoisson.mp4" ></video>
+                                    <canvas class="videoMerge" id="tower2_ours_vs_poissonMerge"></canvas>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>  
+                (Videos will play during mouse hovering / on touch on mobile version.)
+                <br><br>
+                <table style="width: 100%; border-collapse: collapse;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;">
+                                <div style="width: 60%; text-align: center;">
+                                    
+                                    <table style="width: 150%; border-collapse: collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    Ours
+                                                </td>
+                                                <td style="text-align: right;">
+                                                    VGGT+TSDF
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>  
+                                    <video class="video" id="apple2_ours_vs_vggttsdf" loop playsinline autoplay muted src="media/videos/apple2_latentfusionvsvggtfttsdf.mp4" ></video>
+                                    <canvas class="videoMerge" id="apple2_ours_vs_vggttsdfMerge"></canvas>
+                                </div>
+                            </td>
+                            <td style="text-align: right;">
+                                <div style="width: 60%; text-align: right;">
+                                    
+                                    <table style="width: 150%; border-collapse: collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    Ours
+                                                </td>
+                                                <td style="text-align: right;">
+                                                    VGGT+Poisson
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>  
+                                    <video class="video" id="apple2_ours_vs_poisson" loop playsinline autoplay muted src="media/videos/apple2_latentfusionvsvggtftpoisson.mp4" ></video>
+                                    <canvas class="videoMerge" id="apple2_ours_vs_poissonMerge"></canvas>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>  
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    More Results
+                </h3>
+
+                
+            <br><br>
+
+
+                <video id="v0" width="100%" autoplay loop muted controls> 
+                  <source src="media/videos/cup_clip_converted.mp4" type="video/mp4" />
+                </video>
+                <div style="width: 100%; text-align: center;"> 
+                </div>
+                <br><br>
+                <video id="v0" width="100%" autoplay loop muted controls>
+                  <source src="media/videos/human_clip_converted.mp4" type="video/mp4" />
+                </video>
+                <div style="width: 100%; text-align: center;"> 
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Varying level sets
+                </h3>
+
+                <p class="text-justify">
+                LatentFusion predicts well-behaved SDF values throughout the volume, visualized by extracting level sets from varying isovalues. 
+                </p>
+
+                <br>
+
+                <video id="v0" width="100%" autoplay loop muted controls> 
+                  <source src="media/videos/sdf_clip_converted.mp4" type="video/mp4" />
+                </video>
+                <div style="width: 100%; text-align: center;"> 
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-12 col-md-offset-0">
+<textarea id="bibtex" class="form-control" readonly>
+@article{fink2026latentfusion,
+    title={LatentFusion: Decoding Consolidated 3D Geometry from Feed-forward Geometry Transformer Latents},
+    author={Laura Fink and Linus Franke and George Kopanas and Marc Stamminger and Peter Hedman},
+    journal={arXiv preprint arXiv:????.????},
+    year = {2026}
+}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+
+                <p class="text-justify">
+                We would like to thank all members of the Visual Computing Lab Erlangen for the fruitful discussions.
+                <br>
+                The authors gratefully acknowledge the scientific support and HPC resources provided by the National High Performance Computing Center  of the Friedrich-Alexander-Universität Erlangen-Nürnberg (NHR@FAU) under the project b212dc, b175dc, and b201dc. NHR funding is provided by federal and Bavarian state authorities. NHR@FAU hardware is partially funded by the German Research Foundation (DFG) – 440719683.
+                
+                </p>
+                <br>
+                <br>
+                
+
+                <p class="text-justify">
+                    The website template was adapted from  <a href="https://lfranke.github.io/vet">VET</a>, who borrowed from <a href="https://jonbarron.info/zipnerf/">Zip-NeRF</a>, who borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>.
+                    Image sliders are from <a href="https://bakedsdf.github.io/">BakedSDF</a>.
+                </p>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                References
+            </h3>
+    <div class="content has-text-justified">
+        <p>    
+            [Wang 2025] Wang, J., Chen, M., Karaev, N., Vedaldi, A., Rupprecht, C., Novotny, D.: VGGT: Visual geometry grounded transformer. In: Proceedings of the Computer Vision and Pattern Recognition Conference. pp. 5294–5306 (2025).
+        </p>
+        <p>    
+            [Milane  2024] Millane, A., Oleynikova, H., Wirbel, E., Steiner, R., Ramasamy, V., Tingdahl, D., Siegwart, R.: nvblox: Gpu-accelerated incremental signed distance field mapping. In: 2024 IEEE International Conference on Robotics and Automation (ICRA). pp. 2698–2705. IEEE (2024).
+        </p>
+        <p>    
+            [Kazhdan  2006] Kazhdan, M., Bolitho, M., Hoppe, H.: Poisson surface reconstruction. In: Proceedings of the fourth Eurographics symposium on Geometry processing. vol. 7 (2006).
+        </p>
+      </div>
+    </div>
+
+</body>
+</html>
