@@ -1,186 +1,382 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="3D reconstruction, neural rendering, inverse rendering, feed forward">
+  <meta name="description" content="Hi, I'm Laura.">
 
-    <title>Laura Fink</title>
+  <meta property="og:image" content="https://lorafib.github.io/images/me_crop2.png">
+  <meta property="og:image:type" content="image/jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Laura Fink">
+  <meta property="og:description" content="Hi, I'm Laura.">
 
-    <meta name="author" content="Laura Fink">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="https://lorafib.github.io/">
+  <meta name="twitter:title" content="Laura Fink">
+  <meta name="twitter:description" content="Hi, I'm Laura.">
+  <meta name="twitter:image" content="https://lorafib.github.io/images/me_crop2.png">
 
-  </head>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
-  <body>
-    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr style="padding:0px">
-              <td style="padding:2.5%;width:60%;vertical-align:middle">
-                <p class="name" style="text-align: center;">
-                  Laura Fink
-                </p>
-                <p>I'm a PhD Student under the supervision of <a href="https://www.lgdv.tf.fau.de/person/marc-stamminger/">Marc Stamminger</a> at the <a href="https://www.lgdv.tf.fau.de/">Chair of Visual Computing</a> of the Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany in cooperation with <a href="https://www.iis.fraunhofer.de/en.html">Fraunhofer IIS</a>.
-                </p>
-                <p>
-                  I'll finish my PhD presumably mid of 2026 and am open for job inquiries.
-                </p>
-                <p style="text-align:center">
-                  <a href="mailto:">laura (dot) fink (at) fau (dot) de</a> &nbsp;/&nbsp;
-                  <a href="https://scholar.google.de/citations?user=rEH6cSQAAAAJ&hl=en">Scholar</a> &nbsp;/&nbsp;
-                  <br>
-                  <a href="https://github.com/lorafib/">Personal Github</a> &nbsp;/&nbsp;
-                  <a href="https://github.com/lfink-iis">Fraunhofer Github</a>
-                </p>
-              </td>
-              <td style="padding:2.5%;width:40%;max-width:40%">
-                <a href="images/me_crop.png"><img style="width:100%;max-width:100%" alt="profile photo" src="images/me_crop.png" class="hoverZoomLink"></a>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-              <tr>
-              <td style="padding:20px;width:100%;vertical-align:middle">
-                <h2>Research</h2>
-                <p>
-                  My main research is in the fields of computer graphics, vision, and machine learning.
-                   Next to my primary PhD topic on real-time neural rendering, I'm interested in light field displays and rendering. 
-                   First author papers are <span class="highlight">highlighted</span>.
+  <title>Laura Fink</title>
+  <meta name="author" content="Laura Fink">
 
-                </p>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+  <style>
+    :root {
+      --page-width: 980px;
+      --text: #1c1c1c;
+      --muted: #666;
+      --border: #d9d9d9;
+      --surface: #ffffff;
+      --featured: #fff9d8;
+      --link: #1f57a4;
+      --bg: #ffffff;
+      --radius: 6px;
+    }
+    @media (prefers-color-scheme: dark){
+    :root{
+    --bg: #0e0b20;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --link: #85bcff;
+    --card: #0f172a;
+    --border: #5c6b7f;
+    --featured: #383109;
+    --accent: #ffeb3b; /* keep yellow in dark mode */
+    }
+    }
 
-        <tr onmouseout="ref_depth_stop()" onmouseover="ref_depth_start()" bgcolor="#ffffd0">
-          <td style="padding:20px;width:25%;vertical-align:middle">
-            <div class="one">
-              <div class="two" id='ref_depth_image'><video   height=100%  width=100%  muted autoplay loop>
-              <source src="images/ref_depth_teaser.mp4" type="video/mp4" >
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 240px;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .intro h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+    .intro p {
+      margin: 0 0 14px;
+    }
+
+    .contact {
+      margin-top: 18px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .portrait {
+      width: 100%;
+      max-width: 210px;
+      display: block;
+      margin: 0 auto;
+      border-radius: var(--radius);
+    }
+
+    .section-title {
+      margin: 42px 0 8px;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .section-copy {
+      margin: 0 0 20px;
+    }
+
+    .highlight {
+      background: var(--featured);
+      border-radius: 2px;
+      padding: 0 5px;
+    }
+
+    .publications {
+      display: grid;
+      gap: 16px;
+    }
+
+    .paper {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 20px;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .paper.featured {
+      background: var(--featured);
+      border: 1px solid #efe2a6;
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .paper-media {
+      position: relative;
+      width: 160px;
+      min-height: 100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .paper-media img,
+    .paper-media video,
+    .paper-media .media-overlay {
+      width: 160px;
+      max-width: 100%;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .paper-media video {
+      height: auto;
+    }
+
+    .media-overlay {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      transition: opacity 0.4s;
+    }
+
+    .paper-title {
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .paper-meta,
+    .paper-links,
+    .paper-desc {
+      margin: 0 0 6px;
+    }
+
+    .paper-links {
+      color: var(--muted);
+    }
+
+    .paper-desc {
+      margin-bottom: 0;
+    }
+
+    .footer-note,
+    footer {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      text-align: right;
+    }
+
+    footer {
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      text-align: right;
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        padding: 28px 18px 40px;
+      }
+
+      .intro {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .intro-copy {
+        order: 2;
+      }
+
+      .intro-photo {
+        order: 1;
+      }
+
+      .paper {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .paper-media {
+        width: 100%;
+        max-width: 240px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <section class="intro">
+      <div class="intro-copy">
+        <p class="contact" >
+        <h1>Laura Fink</h1>
+        <p>I'm a PhD Student under the supervision of <a href="https://www.lgdv.tf.fau.de/person/marc-stamminger/">Marc Stamminger</a> at the <a href="https://www.lgdv.tf.fau.de/">Chair of Visual Computing</a> of the Friedrich-Alexander-Universität Erlangen-Nürnberg-Fürth, Germany in cooperation with <a href="https://www.iis.fraunhofer.de/en.html">Fraunhofer IIS</a>.</p>
+        <p><!-- I'll finish my PhD presumably mid of 2026 and am open for job inquiries. --></p>
+          <a href="mailto:">laura (dot) fink (at) fau (dot) de</a> &nbsp;/&nbsp;
+          <a href="https://scholar.google.de/citations?user=rEH6cSQAAAAJ&hl=en">Scholar</a> &nbsp;/&nbsp;
+          <br>
+          <a href="https://github.com/lorafib/">Personal Github</a> &nbsp;/&nbsp;
+          <a href="https://github.com/lfink-iis">Fraunhofer Github</a>
+        </p>
+      </div>
+
+      <div class="intro-photo">
+        <a href="images/me_crop2.png">
+          <img class="portrait" src="images/me_crop2.png" alt="profile photo">
+        </a>
+      </div>
+    </section>
+
+    <section aria-labelledby="research-title">
+      <h2 id="research-title" class="section-title">Research</h2>
+      <p class="section-copy">
+        My main research is on the intersection of computer graphics, vision, and machine learning.
+        <!-- Next to my primary PhD topic on real-time neural rendering, I'm interested in light field displays and rendering. -->
+        First author papers are <span class="highlight">highlighted</span>.
+      </p>
+    </section>
+
+    <section class="publications" aria-label="Publications">
+      <article class="paper featured" onmouseout="fus3d_stop()" onmouseover="fus3d_start()">
+        <div class="paper-media">
+          <div class="media-overlay" id="fus3d_image">
+            <video muted autoplay loop>
+              <source src="images/fus3d_teaser_padded.mp4" type="video/mp4">
               Your browser does not support the video tag.
-              </video></div>
-              <img style="vertical-align: bottom;" translate=12px src='images/ref_depth_teaser.jpg' width="160" height="70">
-            </div>
-            <script type="text/javascript">
-              function ref_depth_start() {
-                document.getElementById('ref_depth_image').style.opacity = "1";
-              }
-              function ref_depth_stop() {
-                document.getElementById('ref_depth_image').style.opacity = "0";
-              }
-              ref_depth_stop()
-            </script>
-          </td>
-          <td style="padding:20px;width:75%;vertical-align:middle">
-            <a href="https://lorafib.github.io/ref_depth">
-              <span class="papertitle">Refinement of Monocular Depth Maps via Multi-View Differentiable Rendering</span>
-            </a>
-            <br>
-            <strong>Laura Fink</strong>, Linus Franke, Bernhard Egger, Joachim Keinert, Marc Stamminger
-            <br>
-            <em>Vision, Modeling, and Visualization (VMV), <b>Honorable Mention Award</b></em>, 2025 
-            <br>
-            and ICCV Workshop Wild3D, 2025
-            <br>
+            </video>
+          </div>
+          <img src="images/fus3d_teaser.png" alt="Fus3D teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://lorafib.github.io/fus3d">Fus3D: Decoding Consolidated 3D Geometry from Feed-Forward Geometry Transformer Latents</a></p>
+          <p class="paper-meta"><strong>Laura Fink</strong>, Linus Franke, George Kopanas, Marc Stamminger, Peter Hedman</p>
+          <p class="paper-meta"><em>under submission</em>, 2026</p>
+          <p class="paper-links">
+            <a href="https://lorafib.github.io/fus3d">project page</a>
+            /
+            <a href="https://doi.org/10.48550/arXiv.????.????">arxiv</a>
+            /
+            <a href="https://github.com/lorafib/fus3d">code</a>
+          </p>
+          <p class="paper-desc">Fusing features of feed-forward geometry transformers into a consolidated 3D grid-structured latent space, decoding to SDFs.</p>
+        </div>
+      </article>
+
+      <article class="paper featured" onmouseout="ref_depth_stop()" onmouseover="ref_depth_start()">
+        <div class="paper-media">
+          <div class="media-overlay" id="ref_depth_image">
+            <video muted autoplay loop>
+              <source src="images/ref_depth_teaser.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <img src="images/ref_depth_teaser.jpg" alt="Refinement of Monocular Depth Maps teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://lorafib.github.io/ref_depth">Refinement of Monocular Depth Maps via Multi-View Differentiable Rendering</a></p>
+          <p class="paper-meta"><strong>Laura Fink</strong>, Linus Franke, Bernhard Egger, Joachim Keinert, Marc Stamminger</p>
+          <p class="paper-meta"><em>Vision, Modeling, and Visualization (VMV), <b>Honorable Mention Award</b></em>, 2025<br>and ICCV Workshop Wild3D, 2025</p>
+          <p class="paper-links">
             <a href="https://lorafib.github.io/ref_depth">project page</a>
-            / 
+            /
             <a href="https://doi.org/10.2312/vmv.20251232">paper</a>
-            / 
+            /
             <a href="https://doi.org/10.48550/arXiv.2410.03861">arxiv</a>
             /
             <a href="https://youtu.be/WMiAg0PaPsg">video</a>
             /
             <a href="https://github.com/lorafib/ref_depth">code</a>
-            <p></p>
-            <p>Dense and multi-view consistent depth maps from an monoscopically estimated initialization.</p>
-          </td>
-        </tr>
+          </p>
+          <p class="paper-desc">Dense and multi-view consistent depth maps from an monoscopically estimated initialization.</p>
+        </div>
+      </article>
 
-
-        <tr onmouseout="vrsplatting_stop()" onmouseover="vrsplatting_start()">
-          <td style="padding:20px;width:25%;vertical-align:middle">
-            <div class="one">
-              <div class="two" id='vrsplatting_video' style="transition: opacity 0.4s">
-                <video width=100% height=100% muted autoplay loop>
-                  <source src="images/vrsplatting_teaser_website.mp4" type="video/mp4">Your browser does not support the video tag.
-                </video>
-              </div>
-              <img src='images/vrsplatting_teaser.jpg' id='vrsplatting_image' width="160" style="transition: opacity 0.4s">
-            </div>
-            <script type="text/javascript">
-              function vrsplatting_start() {
-                document.getElementById('vrsplatting_image').style.opacity = "0";
-                document.getElementById('vrsplatting_video').style.opacity = "1";
-              }
-
-              function vrsplatting_stop() {
-                document.getElementById('vrsplatting_video').style.opacity = "0";
-                document.getElementById('vrsplatting_image').style.opacity = "1";
-              }
-              vrsplatting_stop()
-            </script>
-          </td>
-              <td style="padding:20px;width:75%;vertical-align:top">
-                <a href="https://lfranke.github.io/vr_splatting">
-                  <span class="papertitle">VR-Splatting: Foveated Radiance Field Rendering via 3D Gaussian Splatting and Neural Points</span>
-                </a>
-                <br>
-                Linus Franke,
-                <strong>Laura Fink</strong>,
-                Marc Stamminger
-                <br>
-                <em>i3D 2025 (Proceedings of the ACM on Computer Graphics and Interactive Techniques)</em>, 2025
-                <br>
-                <a href="https://lfranke.github.io/vr_splatting">project page</a>
-                /
-                <a href="https://arxiv.org/abs/2410.17932">paper</a>
-           <!--     /
-                <a href="https://youtu.be/Nw4A1tIcErQ">video</a>       -->
-                /
-                <a href="https://github.com/lfranke/vr_splatting">code</a>
-       
-                <p></p>
-                <p>
-                Foveated radiance field rendering with smooth Gaussian peripheral and neural point splats for crisp foveal rendering.
-                </p>
-              </td>
-            </tr>
-
-
-
-        <tr onmouseout="trips_stop()" onmouseover="trips_start()" >
-          <td style="padding:20px;width:25%;vertical-align:bottom">
-            <div class="one">
-              <div class="two" id='trips_image'><video  width=100% height=100%  muted autoplay loop>
-              <source src="images/trips_teaser_website.mp4" type="video/mp4" >
+      <article class="paper" onmouseout="vrsplatting_stop()" onmouseover="vrsplatting_start()">
+        <div class="paper-media">
+          <div class="media-overlay" id="vrsplatting_video">
+            <video muted autoplay loop>
+              <source src="images/vrsplatting_teaser_website.mp4" type="video/mp4">
               Your browser does not support the video tag.
-              </video></div>
-              <img style="vertical-align: bottom;" translate=12px src='images/trips_teaser.jpeg' width="160" height="100">
-            </div>
-            <script type="text/javascript">
-              function trips_start() {
-                document.getElementById('trips_image').style.opacity = "1";
-              }
-              function trips_stop() {
-                document.getElementById('trips_image').style.opacity = "0";
-              }
-              trips_stop()
-            </script>
-          </td>
-          <td style="padding:20px;width:75%;vertical-align:top">
-            <a href="https://lfranke.github.io/trips">
-              <span class="papertitle">TRIPS: Trilinear Point Splatting for Real-Time Radiance Field Rendering</span>
-            </a>
-            <br>
-            Linus Franke,
-            Darius Rückert,
-            <strong>Laura Fink</strong>,
-            Marc Stamminger
-            <br>
-            <em>Eurographics (Computer Graphics Forum)</em>, 2024
-            <br>
+            </video>
+          </div>
+          <img src="images/vrsplatting_teaser.jpg" id="vrsplatting_image" alt="VR-Splatting teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://lfranke.github.io/vr_splatting">VR-Splatting: Foveated Radiance Field Rendering via 3D Gaussian Splatting and Neural Points</a></p>
+          <p class="paper-meta">Linus Franke, <strong>Laura Fink</strong>, Marc Stamminger</p>
+          <p class="paper-meta"><em>i3D 2025 (Proceedings of the ACM on Computer Graphics and Interactive Techniques)</em>, 2025</p>
+          <p class="paper-links">
+            <a href="https://lfranke.github.io/vr_splatting">project page</a>
+            /
+            <a href="https://arxiv.org/abs/2410.17932">paper</a>
+            /
+            <a href="https://github.com/lfranke/vr_splatting">code</a>
+          </p>
+          <p class="paper-desc">Foveated radiance field rendering with smooth Gaussian peripheral and neural point splats for crisp foveal rendering.</p>
+        </div>
+      </article>
+
+      <article class="paper" onmouseout="trips_stop()" onmouseover="trips_start()">
+        <div class="paper-media">
+          <div class="media-overlay" id="trips_image">
+            <video muted autoplay loop>
+              <source src="images/trips_teaser_website.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <img src="images/trips_teaser.jpeg" alt="TRIPS teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://lfranke.github.io/trips">TRIPS: Trilinear Point Splatting for Real-Time Radiance Field Rendering</a></p>
+          <p class="paper-meta">Linus Franke, Darius Rückert, <strong>Laura Fink</strong>, Marc Stamminger</p>
+          <p class="paper-meta"><em>Eurographics (Computer Graphics Forum)</em>, 2024</p>
+          <p class="paper-links">
             <a href="https://lfranke.github.io/trips">project page</a>
             /
             <a href="https://arxiv.org/abs/2401.06003">paper</a>
@@ -188,42 +384,26 @@
             <a href="https://youtu.be/Nw4A1tIcErQ">video</a>
             /
             <a href="https://github.com/lfranke/TRIPS">code</a>
-            <p></p>
-            <p>
-            Rendering and optimizing neural point clouds via trilinear point splatting and tiny neural networks for novel-view synthesis.
-            </p>
-          </td>
-        </tr>
+          </p>
+          <p class="paper-desc">Rendering and optimizing neural point clouds via trilinear point splatting and tiny neural networks for novel-view synthesis.</p>
+        </div>
+      </article>
 
-
-        <tr onmouseout="livenvs_stop()" onmouseover="livenvs_start()" bgcolor="#ffffd0">
-          <td style="padding:20px;width:25%;vertical-align:middle">
-            <div class="one">
-              <div class="two" id='livenvs_image'><video   height=100%  width=100%  muted autoplay loop>
-              <source src="images/livenvs_teaser.mp4" type="video/mp4" >
+      <article class="paper featured" onmouseout="livenvs_stop()" onmouseover="livenvs_start()">
+        <div class="paper-media">
+          <div class="media-overlay" id="livenvs_image">
+            <video muted autoplay loop>
+              <source src="images/livenvs_teaser.mp4" type="video/mp4">
               Your browser does not support the video tag.
-              </video></div>
-              <img style="vertical-align: bottom;" translate=12px src='images/livenvs_teaser.jpg' width="160" height="100">
-            </div>
-            <script type="text/javascript">
-              function livenvs_start() {
-                document.getElementById('livenvs_image').style.opacity = "1";
-              }
-              function livenvs_stop() {
-                document.getElementById('livenvs_image').style.opacity = "0";
-              }
-              livenvs_stop()
-            </script>
-          </td>
-          <td style="padding:20px;width:75%;vertical-align:middle">
-            <a href="https://lorafib.github.io/livenvs">
-              <span class="papertitle">LiveNVS: Neural View Synthesis on Live RGB-D Streams</span>
-            </a>
-            <br>
-            <strong>Laura Fink</strong>, Darius Rückert, Linus Franke, Joachim Keinert, Marc Stamminger
-            <br>
-            <em>SIGGRAPH Asia</em>, 2023
-            <br>
+            </video>
+          </div>
+          <img style="vertical-align: bottom;" translate=12px  width="160" height="100" src='images/livenvs_teaser.jpg' alt="LiveNVS teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://lorafib.github.io/livenvs">LiveNVS: Neural View Synthesis on Live RGB-D Streams</a></p>
+          <p class="paper-meta"><strong>Laura Fink</strong>, Darius Rückert, Linus Franke, Joachim Keinert, Marc Stamminger</p>
+          <p class="paper-meta"><em>SIGGRAPH Asia</em>, 2023</p>
+          <p class="paper-links">
             <a href="https://lorafib.github.io/livenvs">project page</a>
             /
             <a href="http://arxiv.org/abs/2311.16668">paper</a>
@@ -231,228 +411,233 @@
             <a href="https://youtu.be/aMbE5WAgD2k">video</a>
             /
             <a href="https://github.com/Fraunhofer-IIS/livenvs">code</a>
-            <p></p>
-            <p>Novel view synthesis on live RGB-D streams with feedback during capturing, robust to slam loop closures.</p>
-          </td>
-        </tr>
-      
-      <tr onmouseout="vet_stop()" onmouseover="vet_start()">
-        <td style="padding:20px;width:25%;vertical-align:bottom">
-          <div class="one">
-            <div class="two" id='vet_image'><video  width=100% height=100%  muted autoplay loop>
-            <source src="images/vet_bicycle_rescaled.mp4" type="video/mp4" >
-            Your browser does not support the video tag.
-            </video></div>
-            <img style="vertical-align: bottom;" translate=12px src='images/vet_teaser_res.jpeg' width="160" height="100">
-          </div>
-          <script type="text/javascript">
-            function vet_start() {
-              document.getElementById('vet_image').style.opacity = "1";
-            }
-            function vet_stop() {
-              document.getElementById('vet_image').style.opacity = "0";
-            }
-            vet_stop()
-          </script>
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:top">
-          <a href="https://lfranke.github.io/vet">
-            <span class="papertitle">VET: Visual Error Tomography for Point Cloud Completion and High-Quality Neural Rendering</span>
-          </a>
-          <br>
-          Linus Franke,
-          Darius Rückert,
-          <strong>Laura Fink</strong>,
-          Matthias Innmann,
-          Marc Stamminger
-          <br>
-          <em>SIGGRAPH Asia</em>, 2023
-          <br>
-          <a href="https://lfranke.github.io/vet">project page</a>
-          /
-          <a href="http://arxiv.org/abs/2311.04634">paper</a>
-          /
-          <a href="https://youtu.be/adH6GyqC4Jk">video</a>
-          /
-          <a href="https://github.com/lfranke/VET">code</a>
-          <p></p>
-          <p>
-          Improving point-based novel view synthesis quality by completing point cloud with 3D error volumes from 2D error maps.
           </p>
-        </td>
-      </tr>
+          <p class="paper-desc">Novel view synthesis on live RGB-D streams with feedback during capturing, robust to slam loop closures.</p>
+        </div>
+      </article>
 
-
-      <tr onmouseout="inovis_stop()" onmouseover="inovis_start()" >
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <div class="one">
-            <div class="two" id='inovis_image'><video  width=100% height=100%  muted autoplay loop>
-            <source src="images/inovis_teaser_vid.mp4" type="video/mp4" >
-            Your browser does not support the video tag.
-            </video></div>
-            <img style="vertical-align: bottom;" translate=12px src='images/inovis_teaser.jpg' width="160" height="100">
+      <article class="paper" onmouseout="vet_stop()" onmouseover="vet_start()">
+        <div class="paper-media">
+          <div class="media-overlay" id="vet_image">
+            <video muted autoplay loop>
+              <source src="images/vet_bicycle_rescaled.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
           </div>
-          <script type="text/javascript">
-            function inovis_start() {
-              document.getElementById('inovis_image').style.opacity = "1";
-            }
-            function inovis_stop() {
-              document.getElementById('inovis_image').style.opacity = "0";
-            }
-            inovis_stop()
-          </script>
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:top">
-          <a href="https://reality.tf.fau.de/publications/2023/harrerfranke2023inovis/harrerfranke2023inovis.html">
-            <span class="papertitle">Inovis: Instant Novel View Synthesis</span>
-          </a>
-          <br>
-          Mathias Harrer*
-          Linus Franke*,
-          <strong>Laura Fink</strong>,
-          Marc Stamminger,
-          Tim Weyrich
-          <br>
-          <em>SIGGRAPH Asia</em>, 2023
-          <br>
-          <a href="https://reality.tf.fau.de/publications/2023/harrerfranke2023inovis/harrerfranke2023inovis.html">project page</a>
-          /
-          <a href="https://reality.tf.fau.de/publications/2023/harrerfranke2023inovis/harrerfranke2023inovis.pdf">paper</a>
-          /
-          <a href="https://reality.tf.fau.de/publications/2023/harrerfranke2023inovis/harrerfranke2023inovis.mp4">video</a>
-          /
-          <a href="https://github.com/mharrer97/inovis">code</a>
-          <p></p>
-          <p>
-          Point-based novel view synthesis without per scene preprocessing or training using neural image based rendering. (* Joint first authors.)
+          <img style="vertical-align: bottom;" translate=12px  width="160" height="100" src="images/vet_teaser_res.jpeg" alt="VET teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://lfranke.github.io/vet">VET: Visual Error Tomography for Point Cloud Completion and High-Quality Neural Rendering</a></p>
+          <p class="paper-meta">Linus Franke, Darius Rückert, <strong>Laura Fink</strong>, Matthias Innmann, Marc Stamminger</p>
+          <p class="paper-meta"><em>SIGGRAPH Asia</em>, 2023</p>
+          <p class="paper-links">
+            <a href="https://lfranke.github.io/vet">project page</a>
+            /
+            <a href="http://arxiv.org/abs/2311.04634">paper</a>
+            /
+            <a href="https://youtu.be/adH6GyqC4Jk">video</a>
+            /
+            <a href="https://github.com/lfranke/VET">code</a>
           </p>
-        </td>
-      </tr>
+          <p class="paper-desc">Improving point-based novel view synthesis quality by completing point cloud with 3D error volumes from 2D error maps.</p>
+        </div>
+      </article>
 
+      <article class="paper" onmouseout="inovis_stop()" onmouseover="inovis_start()">
+        <div class="paper-media">
+          <div class="media-overlay" id="inovis_image">
+            <video muted autoplay loop>
+              <source src="images/inovis_teaser_vid.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <img src="images/inovis_teaser.jpg" alt="Inovis teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://reality.tf.fau.de/publications/2023/harrerfranke2023inovis/harrerfranke2023inovis.html">Inovis: Instant Novel View Synthesis</a></p>
+          <p class="paper-meta">Mathias Harrer* Linus Franke*, <strong>Laura Fink</strong>, Marc Stamminger, Tim Weyrich</p>
+          <p class="paper-meta"><em>SIGGRAPH Asia</em>, 2023</p>
+          <p class="paper-links">
+            <a href="https://reality.tf.fau.de/publications/2023/harrerfranke2023inovis/harrerfranke2023inovis.html">project page</a>
+            /
+            <a href="https://reality.tf.fau.de/publications/2023/harrerfranke2023inovis/harrerfranke2023inovis.pdf">paper</a>
+            /
+            <a href="https://reality.tf.fau.de/publications/2023/harrerfranke2023inovis/harrerfranke2023inovis.mp4">video</a>
+            /
+            <a href="https://github.com/mharrer97/inovis">code</a>
+          </p>
+          <p class="paper-desc">Point-based novel view synthesis without per scene preprocessing or training using neural image based rendering. (* Joint first authors.)</p>
+        </div>
+      </article>
 
-      <tr  bgcolor="#ffffd0">
-        <td style="padding:20px;width:25%;vertical-align:top">
-          <img src='images/lf_proj_teaser.jpeg' width="160" height="100">
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href="https://dl.acm.org/doi/pdf/10.1145/3585498">
-            <span class="papertitle">Efficient Rendering for Light Field Displays using Tailored Projective Mappings</span>
-          </a>
-          <br>
-          <strong>Laura Fink</strong>, Svenja Strobel, Linus Franke, Marc Stamminger
-          <br>
-          <em>Proceedings of the ACM on Computer Graphics and Interactive Techniques</em>, 2023
-          <br>
-          <a href="https://dl.acm.org/doi/pdf/10.1145/3585498">paper</a>
-          /
-          <a href="https://youtu.be/ntYMnq3-VcA?feature=shared&t=24">presentation</a>
-          /
-          <a href="https://github.com/lorafib/projs-for-lfd-rendering">code</a>
-          <p></p>
-          <p>Rendering only relevant fragments for parallax-based light field displays through device-tailored projection matrices.</p>
-        </td>
-      </tr>
+      <article class="paper featured">
+        <div class="paper-media">
+          <img src="images/lf_proj_teaser.jpeg" alt="Efficient Rendering for Light Field Displays teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://dl.acm.org/doi/pdf/10.1145/3585498">Efficient Rendering for Light Field Displays using Tailored Projective Mappings</a></p>
+          <p class="paper-meta"><strong>Laura Fink</strong>, Svenja Strobel, Linus Franke, Marc Stamminger</p>
+          <p class="paper-meta"><em>Proceedings of the ACM on Computer Graphics and Interactive Techniques</em>, 2023</p>
+          <p class="paper-links">
+            <a href="https://dl.acm.org/doi/pdf/10.1145/3585498">paper</a>
+            /
+            <a href="https://youtu.be/ntYMnq3-VcA?feature=shared&t=24">presentation</a>
+            /
+            <a href="https://github.com/lorafib/projs-for-lfd-rendering">code</a>
+          </p>
+          <p class="paper-desc">Rendering only relevant fragments for parallax-based light field displays through device-tailored projection matrices.</p>
+        </div>
+      </article>
 
+      <article class="paper featured">
+        <div class="paper-media">
+          <img src="images/unitorch_teaser.png" alt="UniTorch teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://link.springer.com/chapter/10.1007/978-3-031-47969-4_25">UniTorch - Integrating Neural Rendering into Unity</a></p>
+          <p class="paper-meta"><strong>Laura Fink</strong>, Daniel Keitel, Marc Stamminger, Joachim Keinert</p>
+          <p class="paper-meta"><em>International Symposium on Visual Computing</em>, 2023</p>
+          <p class="paper-links">
+            <a href="https://link.springer.com/chapter/10.1007/978-3-031-47969-4_25">paper</a>
+          </p>
+          <p class="paper-desc">Discussion and use-case study on the integration of neural rendering into the Unity game engine.</p>
+        </div>
+      </article>
 
-      <tr  bgcolor="#ffffd0">
-        <td style="padding:20px;width:25%;vertical-align:top">
-          <img src='images/unitorch_teaser.png' width="160" height="100">
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href="https://link.springer.com/chapter/10.1007/978-3-031-47969-4_25">
-            <span class="papertitle">UniTorch – Integrating Neural Rendering into Unity</span>
-          </a>
-          <br>
-          <strong>Laura Fink</strong>, Daniel Keitel, Marc Stamminger, Joachim Keinert 
-          <br>
-          <em>International Symposium on Visual Computing</em>, 2023
-          <br>
-          <a href="https://link.springer.com/chapter/10.1007/978-3-031-47969-4_25">paper</a>
-          <p></p>
-          <p>Discussion and use-case study on the integration of neural rendering into the Unity game engine.</p>
-        </td>
-      </tr>
+      <article class="paper">
+        <div class="paper-media">
+          <img src="images/tfov_teaser.jpg" alt="Time-Warped Foveated Rendering teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.14176">Time-Warped Foveated Rendering for Virtual Reality Headsets</a></p>
+          <p class="paper-meta">Linus Franke, <strong>Laura Fink</strong>, Jana Martschinke, Kai Selgrad, Marc Stamminger</p>
+          <p class="paper-meta"><em>Computer Graphics Forum (CGF)</em>, 2021<br><em>Presented (virtually) at Eurographics Vienna 2021</em></p>
+          <p class="paper-links">
+            <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.14176">paper</a>
+            /
+            <a href="https://youtu.be/tdrjMvAlZFc">presentation</a>
+            /
+            <a href="https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1111%2Fcgf.14176&file=cgf14176-sup-0001-SuppMat.pdf">supplemental material</a>
+          </p>
+          <p class="paper-desc">Foveated Rendering via temporal forward reprojection for fast, imperceptible VR rendering.</p>
+        </div>
+      </article>
 
+      <article class="paper featured">
+        <div class="paper-media">
+          <img src="images/lumipath_teaser.png" alt="Lumipath teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://arxiv.org/pdf/1903.03837">Lumipath - Towards real-time physically-based rendering on embedded devices</a></p>
+          <p class="paper-meta"><strong>Laura Fink</strong>, Sing Chun Lee, Jie Ying Wu, Xingtong Liu, Tianyu Song, Yordanka Velikova, Marc Stamminger, Nassir Navab, and Mathias Unberath</p>
+          <p class="paper-meta"><em>MICCAI</em>, 2019</p>
+          <p class="paper-links">
+            <a href="https://arxiv.org/pdf/1903.03837">paper</a>
+            /
+            <a href="https://github.com/lorafib/LumiPath">code</a>
+          </p>
+          <p class="paper-desc">Spherical lightfield rendering based on Fibonacci point sets for immersive AR.</p>
+        </div>
+      </article>
 
-      <tr>
-        <td style="padding:20px;width:25%;vertical-align:top" >
-          <img src='images/tfov_teaser.jpg' width="160" height="100">
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle" >
-          <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.14176">
-            <span class="papertitle">Time‐Warped Foveated Rendering for Virtual Reality Headsets</span>
-          </a>
-          <br>
-          Linus Franke, <strong>Laura Fink</strong>, Jana Martschinke, Kai Selgrad, Marc Stamminger
-          <br>
-          <em>Computer Graphics Forum (CGF)</em>, 2021
-          <br>
-          <em>Presented (virtually) at Eurographics Vienna 2021</em>
-          <br>
-          <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.14176">paper</a>
-          /
-          <a href="https://youtu.be/tdrjMvAlZFc">presentation</a>
-          /
-          <a href="https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1111%2Fcgf.14176&file=cgf14176-sup-0001-SuppMat.pdf">supplemental material</a>
-          <p></p>
-          <p>Foveated Rendering via temporal forward reprojection for fast, imperceptible VR rendering.</p>
-        </td>
-      </tr>
+      <article class="paper featured">
+        <div class="paper-media">
+          <img src="images/hybrid_teaser.png" alt="Hybrid Mono-Stereo Rendering teaser">
+        </div>
+        <div class="paper-copy">
+          <p class="paper-title"><a href="https://www.lgdv.tf.fau.de/files/2019/07/HybridVR-reduced.pdf">Hybrid Mono-Stereo Rendering in Virtual Reality</a></p>
+          <p class="paper-meta"><strong>Laura Fink</strong>, Nora Hensel and Daniela Markov-Vetter, Christoph Weber and Oliver Staadt, and Marc Stamminger</p>
+          <p class="paper-meta"><em>IEEE VR</em>, 2019</p>
+          <p class="paper-links">
+            <a href="https://www.lgdv.tf.fau.de/files/2019/07/HybridVR-reduced.pdf">paper</a>
+          </p>
+          <p class="paper-desc">Approximating far regions of stereo-image pairs by a monoscopic centered view for VR.</p>
+        </div>
+      </article>
+    </section>
 
+    <footer>
+      <p>Thanks to <a href="https://jonbarron.info/">Jon Barron</a> for his great <a href="https://github.com/jonbarron/jonbarron_website">template</a>.</p>
+    </footer>
+  </div>
 
-      <tr  bgcolor="#ffffd0">
-        <td style="padding:20px;width:25%;vertical-align:top">
-          <img src='images/lumipath_teaser.png' width="160" height="100">
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href="https://arxiv.org/pdf/1903.03837">
-            <span class="papertitle">Lumipath – Towards real-time physically-based rendering on embedded devices</span>
-          </a>
-          <br>
-          <strong>Laura Fink</strong>, Sing Chun Lee, Jie Ying Wu, Xingtong Liu, Tianyu Song, Yordanka Velikova, Marc Stamminger, Nassir Navab, and Mathias Unberath
-          <br>
-          <em>MICCAI</em>, 2019
-          <br>
-          <a href="https://arxiv.org/pdf/1903.03837">paper</a>
-          /
-          <a href="https://github.com/lorafib/LumiPath">code</a>
-          <p></p>
-          <p>Spherical lightfield rendering based on Fibonacci point sets for immersive AR.</p>
-        </td>
-      </tr>
+  <script>
+    function fus3d_start() {
+      document.getElementById('fus3d_image').style.opacity = '1';
+    }
+    function fus3d_stop() {
+      document.getElementById('fus3d_image').style.opacity = '0';
+    }
 
-      <tr  bgcolor="#ffffd0">
-        <td style="padding:20px;width:25%;vertical-align:top">
-          <img src='images/hybrid_teaser.png' width="160" height="100">
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href="https://www.lgdv.tf.fau.de/files/2019/07/HybridVR-reduced.pdf">
-            <span class="papertitle">Hybrid Mono-Stereo Rendering in Virtual Reality</span>
-          </a>
-          <br>
-          <strong>Laura Fink</strong>, Nora Hensel and Daniela Markov-Vetter, Christoph Weber and Oliver Staadt, and Marc Stamminger
-          <br>
-          <em>IEEE VR</em>, 2019
-          <br>
-          <a href="https://www.lgdv.tf.fau.de/files/2019/07/HybridVR-reduced.pdf">paper</a>
-          <p></p>
-          <p>Approximating far regions of stereo-image pairs by a monoscopic centered view for VR.</p>
-        </td>
-      </tr>
+    function ref_depth_start() {
+      document.getElementById('ref_depth_image').style.opacity = '1';
+    }
+    function ref_depth_stop() {
+      document.getElementById('ref_depth_image').style.opacity = '0';
+    }
 
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:0px">
-                <br>
-                <p style="text-align:right;font-size:small;">
-                  Thanks to <a href="https://jonbarron.info/">Jon Barron</a> for his great <a href="https://github.com/jonbarron/jonbarron_website">template</a>.
-                </p>
-              </td>
-            </tr>
-          </tbody></table>
-        </td>
-      </tr>
-    </table>
-  </body>
+    function vrsplatting_start() {
+      document.getElementById('vrsplatting_image').style.opacity = '0';
+      document.getElementById('vrsplatting_video').style.opacity = '1';
+    }
+    function vrsplatting_stop() {
+      document.getElementById('vrsplatting_video').style.opacity = '0';
+      document.getElementById('vrsplatting_image').style.opacity = '1';
+    }
+
+    function trips_start() {
+      document.getElementById('trips_image').style.opacity = '1';
+    }
+    function trips_stop() {
+      document.getElementById('trips_image').style.opacity = '0';
+    }
+
+    function livenvs_start() {
+      document.getElementById('livenvs_image').style.opacity = '1';
+    }
+    function livenvs_stop() {
+      document.getElementById('livenvs_image').style.opacity = '0';
+    }
+
+    function vet_start() {
+      document.getElementById('vet_image').style.opacity = '1';
+    }
+    function vet_stop() {
+      document.getElementById('vet_image').style.opacity = '0';
+    }
+
+    function inovis_start() {
+      document.getElementById('inovis_image').style.opacity = '1';
+    }
+    function inovis_stop() {
+      document.getElementById('inovis_image').style.opacity = '0';
+    }
+
+    fus3d_stop();
+    ref_depth_stop();
+    vrsplatting_stop();
+    trips_stop();
+    livenvs_stop();
+    vet_stop();
+    inovis_stop();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Laura Fink",
+    "email": "mailto:laura.fink@fau.de",
+    "jobTitle": "PhD Student",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "FAU Erlangen–Nürnberg–Fürth"
+    },
+    "url": "https://lorafib.github.io/",
+    "sameAs": [
+      "https://github.com/lorafib"
+    ]
+  }
+  </script>
+</body>
 </html>

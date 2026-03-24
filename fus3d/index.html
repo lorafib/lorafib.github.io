@@ -4,30 +4,31 @@
 
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="keywords" content="fus3d, vggt, dust3r, SDF">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>LatentFusion: Decoding Consolidated 3D Geometry from Feed-forward Geometry Transformer Latents</title>
+    <title>Fus3D</title>
 
-    <meta name="description" content="In this paper, we present a novel way to refine depth maps initialized from monoscopic depth estimators via mulit-view differential rendering." />
+    <meta name="description" content="We fuse features of feed-forward geometry transformers into a consolidated 3D grid-structured latent space and decode to SDFs." />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:image" content="https://lorafib.github.io/latentfusion/media/teaser.jpg">
+    <meta property="og:image" content="https://lorafib.github.io/fus3d/media/teaser.jpg">
     <meta property="og:image:type" content="image/jpg">
     <!-- <meta property="og:video:width" content="750">
     <meta property="og:image:height" content="500"> -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="LatentFusion: Decoding Consolidated 3D Geometry from Feed-forward Geometry Transformer Latents" />
-    <meta property="og:description" content="In this paper, we present a novel way to refine depth maps initialized from monoscopic depth estimators via mulit-view differential rendering." />
+    <meta property="og:title" content="Fus3D: Decoding Consolidated 3D Geometry from Feed-Forward Geometry Transformer Latents" />
+    <meta property="og:description" content="We fuse features of feed-forward geometry transformers into a consolidated 3D grid-structured latent space and decode to SDFs." />
 
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="https://lorafib.github.io/latentfusion/" />
-    <meta name="twitter:title" content="LatentFusion: Decoding Consolidated 3D Geometry from Feed-forward Geometry Transformer Latents" />
-    <meta name="twitter:description" content="In this paper, we present a novel way to refine depth maps initialized from monoscopic depth estimators via mulit-view differential rendering." />
-    <meta name="twitter:image" content="https://lorafib.github.io/latentfusion/media/teaser.jpg" />
+    <meta name="twitter:site" content="https://lorafib.github.io/fus3d/" />
+    <meta name="twitter:title" content="Fus3D: Decoding Consolidated 3D Geometry from Feed-Forward Geometry Transformer Latents" />
+    <meta name="twitter:description" content="We fuse features of feed-forward geometry transformers into a consolidated 3D grid-structured latent space and decode to SDFs." />
+    <meta name="twitter:image" content="https://lorafib.github.io/fus3d/media/teaser.jpg" />
 
 
 
-    <link rel="icon" type="image/png" href="media/paper_icon.png">
+    <link rel="icon" type="image/png" href="media/favicon.png">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -65,7 +66,7 @@
         <br><br>
         <div class="row">
             <h2 class="col-md-12 text-center">
-                <b>LatentFusion:</b> Decoding Consolidated 3D Geometry from Feed-forward Geometry Transformer Latents
+                <b>Fus3D:</b> Decoding Consolidated 3D Geometry from Feed-Forward Geometry Transformer Latents
                 
                 <!-- <small>
                     Under review
@@ -129,7 +130,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="https://github.com/lorafib/latentfusion">
+                            <a href="https://github.com/lorafib/fus3d">
                             <img src="media/github.png" height="60px">
                                 <h4><strong>Code</strong></h4> (coming soon)
                             </a>
@@ -143,11 +144,11 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <video id="v0" width="100%" autoplay loop muted controls>
-                  <source src="media/latentfusion_teaser.mp4" type="video/mp4" />
+                <video id="vteaser" width="100%" autoplay controls muted loop playsinline>
+                  <source src="media/teaser.mp4" type="video/mp4" />
                 </video>
                 <p class="text-center">
-                    Example with two input views.
+                    Example with <b>2</b> input views.
                 </p>
             </div>
         </div>
@@ -171,26 +172,22 @@
             </div>
         </div>
 
-        <br><br>
-
-        <div class="row">
+        
+        <div class="row comp-margin">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Overview
                 </h3>
                 <p class="text-justify">
-                LatentFusion directly regresses a 3D representation from the latent space of a multi-view geometry transformer, bypassing per-view prediction and post-hoc fusion. 
+                Fus3D directly regresses a 3D representation from the latent space of a multi-view geometry transformer, bypassing per-view prediction and post-hoc fusion. 
                 This, compared to VGGT [Wang, 2025] using TSDF fusion, yields improved surface completeness under sparse views (left, 2 views) and avoids error accumulation reducing details at scale (right, 24 views), also reflected in the F-score curves across view counts (center).
                 </p>
             <br>
                 <img id="test" src="media/teaser.png" width="100%">  
             </div>
         </div>
-        <br>
-        <br>
-
         
-        <div class="row">
+        <div class="row comp-margin">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Dimensionality of Extraction
@@ -204,11 +201,8 @@
                 <img id="test" src="media/2dvs3d.png" width="100%">  
             </div>
         </div>
-        <br>
 
-        
-        <br>
-        <div class="row">
+        <div class="row comp-margin">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Architecture
@@ -223,27 +217,27 @@
                 <img id="test" src="media/architecture.png" width="100%">  
             </div>
         </div>
-        <br>
-        <br>
 
-        <div class="row">
+        <div class="row comp-margin">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Comparison to Predict-Then-Fuse Methods
                 </h3>
             
             <div style="width: 100%; text-align: center;"> 
-                <video id="v0" width="100%" autoplay loop muted controls> 
-                  <source src="media/videos/cup_clip_converted.mp4" type="video/mp4" />
+                <video id="vcups" width="100%" autoplay controls muted loop playsinline> 
+                  <source src="media/videos/fus3d_cupclip_converted.mp4" type="video/mp4" />
                 </video>
                 <br><br>
-                <video id="v0" width="100%" autoplay loop muted controls>
-                    <source src="media/videos/human_clip_converted.mp4" type="video/mp4" />
+                <video id="vhuman" width="100%" autoplay controls muted loop playsinline>
+                    <source src="media/videos/fus3d_humanclip_converted.mp4" type="video/mp4" />
                 </video>
             </div>
         </div>
 
-        <div class="row">
+        
+
+        <div class="row comp-margin">
             <div class="col-md-8 col-md-offset-2 ">
                 <h3>
                     Comparison to Generalizable SDF predictors
@@ -254,16 +248,7 @@
                 </p>
             </div>
 
-            <div class="col-md-4 col-md-offset-2"  style="text-align: center;"> 
-                <div style="width: 100%; text-align: center;"> 
-                    Challenging view combinations
-                </div>
-                </div>
-                <div class="col-md-4"  style="text-align: center;"> 
-                <div style="width: 100%; text-align: center;"> 
-                    Default view combinations
-                </div>
-            </div>
+           
             <div class="col-md-8 col-md-offset-2 ">
                 <div style="text-align: center;">
                     <img src="media/dtu_sdf.png"  width="100%">
@@ -286,7 +271,7 @@
                 </h3>
                 
                 <p class="text-justify">
-                    LatentFusion produces plausible reconstructions from only <b>two input views</b>, extrapolating the predicted SDF in unboserved regions. 
+                    Fus3D produces plausible reconstructions from only <b>two input views</b>, extrapolating the predicted SDF in unboserved regions. 
                 </p>
             </div>
             <!-- <table style="width: 100%; border-collapse: collapse;"> -->
@@ -375,25 +360,21 @@
         </div>
 
 
-        <br>
-        <br>
 
-
-
-        <div class="row">
+        <div class="row comp-margin">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Varying level sets
                 </h3>
 
                 <p class="text-justify">
-                LatentFusion predicts well-behaved SDF values throughout the volume, visualized by extracting level sets from varying isovalues. 
+                Fus3D predicts well-behaved SDF values throughout the volume, visualized by extracting level sets from varying isovalues. 
                 </p>
 
                 <br>
 
-                <video id="v0" width="100%" autoplay loop muted controls> 
-                  <source src="media/videos/sdf_clip_converted.mp4" type="video/mp4" />
+                <video id="visovals" width="100%" autoplay controls muted loop playsinline> 
+                  <source src="media/videos/fus3d_sdfclips_converted.mp4" type="video/mp4" />
                 </video>
                 <div style="width: 100%; text-align: center;"> 
                 </div>
@@ -403,19 +384,18 @@
         <br>
 
 
-        <div class="row">
+        <div class="row comp-margin">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Citation
                 </h3>
                 <div class="form-group col-md-12 col-md-offset-0">
-<textarea id="bibtex" class="form-control" readonly>
-@article{fink2026latentfusion,
-    title={LatentFusion: Decoding Consolidated 3D Geometry from Feed-forward Geometry Transformer Latents},
+<pre><code width="100%" style="font-size: 0.8em;">@article{fink2026fus3d,
+    title={Fus3D: Decoding Consolidated 3D Geometry from Feed-Forward Geometry Transformer Latents},
     author={Laura Fink and Linus Franke and George Kopanas and Marc Stamminger and Peter Hedman},
     journal={arXiv preprint arXiv:????.????},
     year = {2026}
-}</textarea>
+}</code></pre>
                 </div>
             </div>
         </div>
