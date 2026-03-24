@@ -154,6 +154,10 @@ span.highlight {
 
 .list-inline > li {
 	display: inline-block;
-	margin-left: 0.5em;
-	margin-right: 0.5em;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+.row {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }

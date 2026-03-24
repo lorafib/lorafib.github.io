@@ -75,36 +75,38 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <ul class="list-inline">
-                    <li>
+                    <li> 
                         <a style="text-decoration:none" href="https://lorafib.github.io">
                             Laura Fink
                         </a>
                         <br>FAU Erlangen-Nürnberg <br> &zwnj;
                     </li>
-                    <li>
+                    
+                    <li> 
                         <a style="text-decoration:none" href="https://lfranke.github.io">
                             Linus Franke
                         </a>
-                        <br>Inria<br> FAU Erlangen-Nürnberg
+                        <br>Inria, Université Côte d’Azur<br> FAU Erlangen-Nürnberg
                     </li>
-                    <li>
+                    <li> 
                         <a style="text-decoration:none" href="https://grgkopanas.github.io/">
                             George Kopanas
                         </a>
-                        <br>Google Deepmind<br> &zwnj;
+                        <br>Google DeepMind<br> &zwnj;
                     </li>
-                    <li>
+                    <li> 
                         <a style="text-decoration:none" href="https://www.lgdv.tf.fau.de/person/marc-stamminger/">
                             Marc Stamminger
                         </a>
                         <br>FAU Erlangen-Nürnberg
                         <br>  &zwnj;
                     </li>
-                    <li>
+                    <li> 
                         <a style="text-decoration:none" href="https://phogzone.com/">
                             Peter Hedman
                         </a>
-                        <br>Google Deepmind<br> &zwnj;
+                        <br><span style="font-size: 0.7em;">work done while at</span>
+                        <br>Google DeepMind<br>
                     </li>
                 </ul>
             </div>
@@ -185,9 +187,9 @@
             </div>
         </div>
         <br>
+        <br>
 
         
-        <br>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
@@ -222,9 +224,59 @@
             </div>
         </div>
         <br>
-
-       
         <br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Comparison to Predict-Then-Fuse Methods
+                </h3>
+            
+            <div style="width: 100%; text-align: center;"> 
+                <video id="v0" width="100%" autoplay loop muted controls> 
+                  <source src="media/videos/cup_clip_converted.mp4" type="video/mp4" />
+                </video>
+                <br><br>
+                <video id="v0" width="100%" autoplay loop muted controls>
+                    <source src="media/videos/human_clip_converted.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 ">
+                <h3>
+                    Comparison to Generalizable SDF predictors
+                </h3>
+                
+                <p class="text-justify">
+                    We compare to other generalizable distance field prediction methods, VolRecon [Ren 2023] and UFOrecon [Na 2024], on standard and challenging view sets (as proposed by UFOrecon).
+                </p>
+            </div>
+
+            <div class="col-md-4 col-md-offset-2"  style="text-align: center;"> 
+                <div style="width: 100%; text-align: center;"> 
+                    Challenging view combinations
+                </div>
+                </div>
+                <div class="col-md-4"  style="text-align: center;"> 
+                <div style="width: 100%; text-align: center;"> 
+                    Default view combinations
+                </div>
+            </div>
+            <div class="col-md-8 col-md-offset-2 ">
+                <div style="text-align: center;">
+                    <img src="media/dtu_sdf.png"  width="100%">
+                </div>
+            </div>
+        </div>
+
+
+        
+
+        <br>
+        <br>
+
 
 
         <div class="row comp-margin">
@@ -234,130 +286,99 @@
                 </h3>
                 
                 <p class="text-justify">
-                LatentFusion produces plausible reconstructions from only <b>two input views</b>, extrapolating the predicted SDF in unboserved regions. 
+                    LatentFusion produces plausible reconstructions from only <b>two input views</b>, extrapolating the predicted SDF in unboserved regions. 
                 </p>
-                <table style="width: 100%; border-collapse: collapse;">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: left;">
-                                <div style="width: 60%; text-align: center;">
-                                    
-                                    <table style="width: 150%; border-collapse: collapse;">
-                                        <tbody>
-                                            <tr>
-                                                <td style="text-align: left;">
-                                                    Ours
-                                                </td>
-                                                <td style="text-align: right;">
-                                                    VGGT+TSDF
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>  
-                                    <video class="video" id="tower2_ours_vs_vggttsdf" loop playsinline autoplay muted src="media/videos/tower2_latentfusionvsvggtfttsdf.mp4" ></video>
-                                    <canvas class="videoMerge" id="tower2_ours_vs_vggttsdfMerge"></canvas>
-                                </div>
-                            </td>
-                            <td style="text-align: right;">
-                                <div style="width: 60%; text-align: right;">
+            </div>
+            <!-- <table style="width: 100%; border-collapse: collapse;"> -->
+                <!-- <tbody>
+                    <tr>
+                        <td style="text-align: left;">
+                            <div style="width: 60%; text-align: center;">
                                 
-                                    <table style="width: 150%; border-collapse: collapse;">
-                                        <tbody>
-                                            <tr>
-                                                <td style="text-align: left;">
-                                                    Ours
-                                                </td>
-                                                <td style="text-align: right;">
-                                                    VGGT+Poisson
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>  
-                                    <video class="video" id="tower2_ours_vs_poisson" loop playsinline autoplay muted src="media/videos/tower2_latentfusionvsvggtftpoisson.mp4" ></video>
-                                    <canvas class="videoMerge" id="tower2_ours_vs_poissonMerge"></canvas>
-                                </div>
+                                <table style="width: 150%; border-collapse: collapse;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                Ours
+                                            </td>
+                                            <td style="text-align: right;">
+                                                VGGT+TSDF
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>   -->
 
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>  
+        </div>
+        <div class="row comp-margin">
+            
+            <div class="col-md-2 col-md-offset-2" style="text-align: center;">
+                Ours
+            </div>
+            <div class="col-md-2" style="text-align: center;">
+                VGGT+TSDF
+            </div>
+            <div class="col-md-2" style="text-align: center;">
+                Ours
+            </div>
+            <div class="col-md-2" style="text-align: center;">
+                VGGT+TSDF
+            </div>
+        </div>
+        <div class="row comp-margin">
+            <div class="col-md-4 col-md-offset-2"> 
+                <div style="width: 100%; text-align: center;">
+                <video width="100%" class="video" id="tower2_ours_vs_vggttsdf" loop playsinline autoplay muted src="media/videos/tower2_latentfusionvsvggtfttsdf.mp4" ></video>
+                <canvas class="videoMerge" id="tower2_ours_vs_vggttsdfMerge"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4"> 
+                <div style="width: 100%; text-align: center;">
+                <video width="100%" class="video" id="tower2_ours_vs_poisson" loop playsinline autoplay muted src="media/videos/tower2_latentfusionvsvggtftpoisson.mp4" ></video>
+                                        <canvas class="videoMerge" id="tower2_ours_vs_poissonMerge"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row comp-margin">
+            <div class="col-md-12 col-md-offset-2"> 
                 (Videos will play during mouse hovering / on touch on mobile version.)
-                <br><br>
-                <table style="width: 100%; border-collapse: collapse;">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: left;">
-                                <div style="width: 60%; text-align: center;">
-                                    
-                                    <table style="width: 150%; border-collapse: collapse;">
-                                        <tbody>
-                                            <tr>
-                                                <td style="text-align: left;">
-                                                    Ours
-                                                </td>
-                                                <td style="text-align: right;">
-                                                    VGGT+TSDF
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>  
-                                    <video class="video" id="apple2_ours_vs_vggttsdf" loop playsinline autoplay muted src="media/videos/apple2_latentfusionvsvggtfttsdf.mp4" ></video>
-                                    <canvas class="videoMerge" id="apple2_ours_vs_vggttsdfMerge"></canvas>
-                                </div>
-                            </td>
-                            <td style="text-align: right;">
-                                <div style="width: 60%; text-align: right;">
-                                    
-                                    <table style="width: 150%; border-collapse: collapse;">
-                                        <tbody>
-                                            <tr>
-                                                <td style="text-align: left;">
-                                                    Ours
-                                                </td>
-                                                <td style="text-align: right;">
-                                                    VGGT+Poisson
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>  
-                                    <video class="video" id="apple2_ours_vs_poisson" loop playsinline autoplay muted src="media/videos/apple2_latentfusionvsvggtftpoisson.mp4" ></video>
+            </div>
+        </div>
+
+        <div class="row comp-margin">
+            
+            <div class="col-md-2 col-md-offset-2" style="text-align: center;">
+                Ours
+            </div>
+            <div class="col-md-2" style="text-align: center;">
+                VGGT+TSDF
+            </div>
+            <div class="col-md-2" style="text-align: center;">
+                Ours
+            </div>
+            <div class="col-md-2" style="text-align: center;">
+                VGGT+TSDF
+            </div>
+        </div>
+        <div class="row comp-margin">
+            <div class="col-md-4 col-md-offset-2"> 
+                <div style="width: 100%; text-align: center;">
+                <video width="100%" class="video" id="apple2_ours_vs_vggttsdf" loop playsinline autoplay muted src="media/videos/apple2_latentfusionvsvggtfttsdf.mp4" ></video>
+                <canvas class="videoMerge" id="apple2_ours_vs_vggttsdfMerge"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4"> 
+                <div style="width: 100%; text-align: center;">
+                <video width="100%" class="video" id="apple2_ours_vs_poisson" loop playsinline autoplay muted src="media/videos/apple2_latentfusionvsvggtftpoisson.mp4" ></video>
                                     <canvas class="videoMerge" id="apple2_ours_vs_poissonMerge"></canvas>
-                                </div>
-
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>  
-            </div>
-        </div>
-
-        <br>
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    More Results
-                </h3>
-
-                
-            <br><br>
-
-
-                <video id="v0" width="100%" autoplay loop muted controls> 
-                  <source src="media/videos/cup_clip_converted.mp4" type="video/mp4" />
-                </video>
-                <div style="width: 100%; text-align: center;"> 
-                </div>
-                <br><br>
-                <video id="v0" width="100%" autoplay loop muted controls>
-                  <source src="media/videos/human_clip_converted.mp4" type="video/mp4" />
-                </video>
-                <div style="width: 100%; text-align: center;"> 
                 </div>
             </div>
         </div>
 
+
         <br>
+        <br>
+
+
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -431,8 +452,14 @@
         <p>    
             [Wang 2025] Wang, J., Chen, M., Karaev, N., Vedaldi, A., Rupprecht, C., Novotny, D.: VGGT: Visual geometry grounded transformer. In: Proceedings of the Computer Vision and Pattern Recognition Conference. pp. 5294–5306 (2025).
         </p>
+        <p>
+            [Na 2024] Na, Y., Kim, W.J., Han, K.B., Ha, S., Yoon, S.E.: Uforecon: Generalizable sparse-view surface reconstruction from arbitrary and unfavorable sets. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 5094–5104 (2024).
+        </p>
         <p>    
-            [Milane  2024] Millane, A., Oleynikova, H., Wirbel, E., Steiner, R., Ramasamy, V., Tingdahl, D., Siegwart, R.: nvblox: Gpu-accelerated incremental signed distance field mapping. In: 2024 IEEE International Conference on Robotics and Automation (ICRA). pp. 2698–2705. IEEE (2024).
+            [Millane  2024] Millane, A., Oleynikova, H., Wirbel, E., Steiner, R., Ramasamy, V., Tingdahl, D., Siegwart, R.: nvblox: Gpu-accelerated incremental signed distance field mapping. In: 2024 IEEE International Conference on Robotics and Automation (ICRA). pp. 2698–2705. IEEE (2024).
+        </p>
+        <p>
+            [Ren 2023] Ren, Y., Wang, F., Zhang, T., Pollefeys, M., Süsstrunk, S.: Volrecon: Volume rendering of signed ray distance functions for generalizable multi-view reconstruction. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 16685–16695 (2023).
         </p>
         <p>    
             [Kazhdan  2006] Kazhdan, M., Bolitho, M., Hoppe, H.: Poisson surface reconstruction. In: Proceedings of the fourth Eurographics symposium on Geometry processing. vol. 7 (2006).
